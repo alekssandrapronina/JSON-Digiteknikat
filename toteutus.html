@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toteutus - Haaga-Helia Kurssi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #00529B;
+    }
+    img {
+      max-width: 200px;
+    }
+    nav a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: #00529B;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="kurssitehtävä1.html">Etusivu</a>
+    <a href="toteutus.html">Kurssin tiedot</a>
+  </nav>
+
+  <h1>Kurssin tiedot</h1>
+  <div id="response"></div>
+
+  <script>
+    fetch('https://run.mocky.io/v3/ea5161c0-5b52-4a6a-930f-cc313394e688')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        var content = "<h2>" + data.toteutuksen_nimi + "</h2>";
+        content += "<p>Osallistujien lukumäärä: " + data.osallistujien_lukumäärä + "</p>";
+        content += "<h3>Osallistujat:</h3><ul>";
+        for (var i = 0; i < data.osallistujat.length; i++) {
+          content += "<li>" + data.osallistujat[i].nimi + "</li>";
+        }
+        content += "</ul>";
+        content += "<p>Alkamisaika: " + data.alkamis_aika + "</p>";
+        content += "<p>Loppumisaika: " + data.loppumis_aika + "</p>";
+        content += "<p>Kesto viikkoina: " + data.kesto_viikkoina + "</p>";
+        content += "<img src='" + data.kuva + "' alt='Kurssin kuva'>";
+
+        document.getElementById('response').innerHTML = content;
+      })
+      .catch(function(error) {
+        document.getElementById('response').innerHTML = "<p>Tietoja ei voitu ladata</p>";
+        console.error('Virhe tietojen haussa:', error);
+      });
+  </script>
+
+</body>
+</html>
