@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Aleksandan JSON example</title> 
+  <title>Haaga-Helia Kurssi</title> 
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -19,64 +19,58 @@
     }
   
     p {
-      font-size: 1.1em;
+      font-size: 1.1em; 
     }
   </style>
 </head>
 <body>
+  <!-- Navigointi eri sivujen välillä -->
   <nav>
     <a href="index.html">Etusivu</a>
     <a href="toteutus.html">Kurssin tiedot</a>
   </nav>
-  
 
-  <!-- Tämä on alue, johon näytetään JSON-tiedot -->
+  <!-- JSON-tiedot -->
   <div id="response"></div>
 
   <script>
-    // Hae JSON-tiedot annetusta URL-osoitteesta
-    fetch('https://run.mocky.io/v3/fa538d9f-d6d0-42fb-8dae-98694d10f8af')
+    // JSON-tiedot //
+    fetch('https://run.mocky.io/v3/0369d605-c182-429d-a24b-9be1c870e0a3')
       .then(function(response) {
-        // Kun tiedot saadaan, ne muunnetaan JSON-muotoon
         return response.json(); 
       })
       .then(function(data) {
-        // Tässä rakennetaan HTML-sisältöä, joka lisätään sivulle
-
-        // Otsikko, joka tulee JSON-tiedosta (data.otsikko)
+        // JSON-tiedon 'otsikko' //
         var content = "<h1>" + data.otsikko + "</h1>";
 
-        // Kuvaus JSON-tiedosta (data.kuvaus)
+        // JSON-tiedon 'kuvaus'//
         content += "<p>" + data.kuvaus + "</p>";
-
-        // Kuvan lisääminen (data.kuva)
+        // Kuva //
         content += "<img src='" + data.kuva + "' alt='Kuva'>";
 
-        // Opintojakson tietojen näyttäminen (nimi, tunnus, opintopisteet)
+        // Opintojakson tiedot //
         content += "<h2>Opintojakso:</h2>";
         content += "<p>Nimi: " + data.opintojakso.nimi + "</p>";
         content += "<p>Tunnus: " + data.opintojakso.tunnus + "</p>";
         content += "<p>Opintopisteet: " + data.opintojakso.opintopisteet + "</p>";
 
-        // Sisällön näyttäminen (data.sisalto)
+        // Kurssin sisältö listana //
         content += "<h2>Sisältö:</h2><ul>";
         for (var i = 0; i < data.sisalto.length; i++) {
           content += "<li>" + data.sisalto[i] + "</li>";
         }
         content += "</ul>";
 
-        // Tekniikoiden näyttäminen (data.tekniikat)
+        // Linkit//
         content += "<h2>Tekniikat:</h2><ul>";
         for (var j = 0; j < data.tekniikat.length; j++) {
           content += "<li><a href='" + data.tekniikat[j].linkki + "'>" + data.tekniikat[j].aihe + "</a></li>";
         }
         content += "</ul>";
-
-        // Aseta luotu sisältö näkyville "response"-diviin
         document.getElementById('response').innerHTML = content;
       })
       .catch(function(error) {
-        // Jos tulee virhe, näytä viesti
+        //Virheilmoitus//
         document.getElementById('response').innerHTML = "<p>Tietoja ei voitu ladata</p>";
         console.error('Virhe tietojen haussa:', error);
       });
@@ -84,3 +78,4 @@
 
 </body>
 </html>
+

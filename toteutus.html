@@ -27,35 +27,40 @@
 </head>
 <body>
 
+  <!-- Navigointivalikko -->
   <nav>
     <a href="index.html">Etusivu</a>
     <a href="toteutus.html">Kurssin tiedot</a>
   </nav>
-
   <h1>Kurssin tiedot</h1>
-  <div id="response"></div>
 
+  <div id="response"></div>
   <script>
-    fetch('https://run.mocky.io/v3/ea5161c0-5b52-4a6a-930f-cc313394e688')
+    // JSON-tiedot //
+    fetch('https://run.mocky.io/v3/39425555-a689-47ef-b636-b009fc845e3b')
       .then(function(response) {
         return response.json();
       })
       .then(function(data) {
         var content = "<h2>" + data.toteutuksen_nimi + "</h2>";
         content += "<p>Osallistujien lukumäärä: " + data.osallistujien_lukumäärä + "</p>";
+
+        // Osallistujat //
         content += "<h3>Osallistujat:</h3><ul>";
         for (var i = 0; i < data.osallistujat.length; i++) {
           content += "<li>" + data.osallistujat[i].nimi + "</li>";
         }
         content += "</ul>";
+
+        //Alkamis- ja loppumisaika //
         content += "<p>Alkamisaika: " + data.alkamis_aika + "</p>";
         content += "<p>Loppumisaika: " + data.loppumis_aika + "</p>";
         content += "<p>Kesto viikkoina: " + data.kesto_viikkoina + "</p>";
-        content += "<img src='" + data.kuva + "' alt='Kurssin kuva'>";
 
         document.getElementById('response').innerHTML = content;
       })
       .catch(function(error) {
+        // Virheilmoitus //
         document.getElementById('response').innerHTML = "<p>Tietoja ei voitu ladata</p>";
         console.error('Virhe tietojen haussa:', error);
       });
