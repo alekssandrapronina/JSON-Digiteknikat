@@ -9,17 +9,19 @@
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-  
-    h1 {
-      font-size: 2em;
+    h1, h2 {
+      color: #00529B;
     }
-  
-    h2 {
-      font-size: 1.5em;
+    img {
+      max-width: 200px;
     }
-  
-    p {
-      font-size: 1.1em; 
+    nav a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: #00529B;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -46,7 +48,7 @@
         // JSON-tiedon 'kuvaus'//
         content += "<p>" + data.kuvaus + "</p>";
         // Kuva //
-        content += "<img src='" + data.kuva + "' alt='Kuva'>";
+        content += "<img src='" + data.kuva + "'alt='Kurssin kuva' style='max-width: 400px;'>"
 
         // Opintojakson tiedot //
         content += "<h2>Opintojakso:</h2>";

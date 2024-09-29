@@ -37,12 +37,13 @@
   <div id="response"></div>
   <script>
     // JSON-tiedot //
-    fetch('https://run.mocky.io/v3/39425555-a689-47ef-b636-b009fc845e3b')
+    fetch('https://run.mocky.io/v3/77c65721-23d8-4f0a-863d-4581eeb2bde6')
       .then(function(response) {
         return response.json();
       })
       .then(function(data) {
         var content = "<h2>" + data.toteutuksen_nimi + "</h2>";
+        content += "<img src='" + data.kuva + "' alt='Kurssin kuva' style='max-width: 250px;'>"; 
         content += "<p>Osallistujien lukumäärä: " + data.osallistujien_lukumäärä + "</p>";
 
         // Osallistujat //
